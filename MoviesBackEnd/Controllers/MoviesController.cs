@@ -62,5 +62,19 @@ namespace MoviesBackEnd.Controllers
             return await _moviesService.GetTvShowsByCategory(categoryId, take);
         }
 
+        [Route("GetTvShowsCategories")]
+        [HttpGet]
+        public async Task<Dictionary<string, object>> GetTvShowsCategories()
+        {
+            return await _moviesService.GetTvShowsCategories();
+        }
+
+        [Route("GetMoviesCategories")]
+        [HttpGet]
+        public async Task<Dictionary<string, object>> GetMoviesCategories()
+        {
+            return await _moviesService.GetMoviesCategories();
+        }
+
     }
 }

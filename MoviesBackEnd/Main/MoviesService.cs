@@ -11,6 +11,7 @@ namespace MoviesBackEnd.Main
     public class MoviesService : IMoviesService
     {
         private IHttpService _httpService;
+
         public MoviesService(IHttpService _httpService)
         {
             this._httpService = _httpService;
@@ -82,7 +83,7 @@ namespace MoviesBackEnd.Main
             var queryResult = await this._httpService.Get<Movie>(url);
             if (queryResult != null)
             {
-                var originalListOfMovies= queryResult.Results.Take(take).ToList();
+                var originalListOfMovies = queryResult.Results.Take(take).ToList();
                 var listOfMovies = Mapper.MapMovies(originalListOfMovies);
                 return listOfMovies;
             }
@@ -110,6 +111,25 @@ namespace MoviesBackEnd.Main
                 return new List<Item>(); //empty object
             }
         }
-        
+
+        public async Task<Dictionary<string, object>> GetTvShowsCategories()
+        {
+            
+            var url = GlobalVariables.Url + "/genre/tv/list?api_key=" +
+                        GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
+            var tvShowsCategories = await this._httpService.GetItem<Dictionary<string, object>>(url);
+
+            return tvShowsCategories;
+        }
+
+        public async Task<Dictionary<string,object>> GetMoviesCategories()
+        {
+            
+            var url = GlobalVariables.Url + "/genre/movie/list?api_key=" +
+                        GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
+            var movieCategories = await this._httpService.GetItem<Dictionary<string, object>>(url);
+
+            return movieCategories;
+        }
     }
 }
