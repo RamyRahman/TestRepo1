@@ -47,8 +47,20 @@ namespace MoviesBackEnd.Controllers
         {
             return await _moviesService.GetTvShowById(id);
         }
-        
 
+        [Route("GetMoviesByCategory")]
+        [HttpGet]
+        public async Task<List<Item>> GetMoviesByCategory(int categoryId, int take)
+        {
+            return await _moviesService.GetMoviesByCategory(categoryId,take);
+        }
+
+        [Route("GetTvShowsByCategory")]
+        [HttpGet]
+        public async Task<List<Item>> GetTvShowsByCategory(int categoryId, int take)
+        {
+            return await _moviesService.GetTvShowsByCategory(categoryId, take);
+        }
 
     }
 }

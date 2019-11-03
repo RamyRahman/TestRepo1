@@ -61,16 +61,55 @@ namespace MoviesBackEnd.Main
                           GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
             var tvShow = await this._httpService.GetItem<Dictionary<string, object>>(url);
 
-            return tvShow ;
+            return tvShow;
         }
 
         public async Task<Dictionary<string, object>> GetMovieById(int id)
         {
             var url = GlobalVariables.Url + "/movie/" + id + "?api_key=" +
                           GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
-            var movie = await this._httpService.GetItem<Dictionary<string,object>>(url);
+            var movie = await this._httpService.GetItem<Dictionary<string, object>>(url);
 
-            return  movie ;
+            return movie;
         }
+
+        public async Task<List<Item>> GetMoviesByCategory(int categoryId, int take)
+        {
+            var url = GlobalVariables.Url + "/discover/tv?api_key=" +
+               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language
+               + "&sort_by=vote_average.desc&with_genres=" + categoryId;
+
+            var queryResult = await this._httpService.Get<Movie>(url);
+            if (queryResult != null)
+            {
+                var originalListOfMovies= queryResult.Results.Take(take).ToList();
+                var listOfMovies = Mapper.MapMovies(originalListOfMovies);
+                return listOfMovies;
+            }
+            else
+            {
+                return new List<Item>(); //empty object
+            }
+        }
+
+        public async Task<List<Item>> GetTvShowsByCategory(int categoryId, int take)
+        {
+            var url = GlobalVariables.Url + "/discover/movie?api_key=" +
+               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language
+               + "&sort_by=vote_average.desc&with_genres=" + categoryId;
+
+            var queryResult = await this._httpService.Get<TvShow>(url);
+            if (queryResult != null)
+            {
+                var originalListOfTvShows = queryResult.Results.Take(take).ToList();
+                var listOfTvShows = Mapper.MapTvShows(originalListOfTvShows);
+                return listOfTvShows;
+            }
+            else
+            {
+                return new List<Item>(); //empty object
+            }
+        }
+        
     }
 }

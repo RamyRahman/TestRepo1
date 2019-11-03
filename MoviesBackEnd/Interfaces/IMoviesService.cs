@@ -16,5 +16,9 @@ namespace MoviesBackEnd.Interfaces
 
         Task<Dictionary<string, object>> GetTvShowById(int id);
 
+        Task<List<Item>> GetMoviesByCategory(int categoryId, int take);
+
+        Task<List<Item>> GetTvShowsByCategory(int categoryId, int take);
+
     }
 }
