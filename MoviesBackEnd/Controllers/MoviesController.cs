@@ -22,16 +22,16 @@ namespace MoviesBackEnd.Controllers
 
         [Route("GetTopRatedMovies")]
         [HttpGet]
-        public async Task<ItemsResponse> GetMovies(int page)
+        public async Task<List<Item>> GetMovies()
         {
-            return await _moviesService.GetTopRatedMovies(page);
+            return await _moviesService.GetTopRatedMovies();
         }
 
         [Route("GetTopRatedTvShows")]
         [HttpGet]
-        public async Task<ItemsResponse> GetTvShows(int page)
+        public async Task<List<Item>> GetTvShows()
         {
-            return await _moviesService.GetTopRatedTvShows(page);
+            return await _moviesService.GetTopRatedTvShows();
         }
 
     }

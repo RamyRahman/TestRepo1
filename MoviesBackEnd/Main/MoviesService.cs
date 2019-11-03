@@ -16,38 +16,40 @@ namespace MoviesBackEnd.Main
             this._httpService = _httpService;
         }
 
-        public async Task<ItemsResponse> GetTopRatedMovies(int page)
+        public async Task<List<Item>> GetTopRatedMovies()
         {
             var url = GlobalVariables.Url + "/movie/top_rated?api_key=" +
-                GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language + "&page=" + page; 
+                GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language; 
 
             var queryResult = await this._httpService.Get<Movie>(url);
             if (queryResult != null)
             {
-                ItemsResponse listOfMovies = Mapper.MapMovies(queryResult);
+                var originalListOfMovies= queryResult.Results.Take(6).ToList();
+                var listOfMovies = Mapper.MapMovies(originalListOfMovies);
                 return listOfMovies;
             }
             else
             {
-                return new ItemsResponse(); //empty object
+                return new List<Item>(); //empty object
             }
 
         }
 
-        public async Task<ItemsResponse> GetTopRatedTvShows(int page)
+        public async Task<List<Item>> GetTopRatedTvShows()
         {
             var url = GlobalVariables.Url + "/tv/top_rated?api_key=" +
-               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language + "&page=" + page;
+               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language ;
 
             var queryResult = await this._httpService.Get<TvShow>(url);
             if (queryResult != null)
             {
-                ItemsResponse listOfMovies = Mapper.MapTvShows(queryResult);
-                return listOfMovies;
+                var originalListOfTvShows= queryResult.Results.Take(6).ToList();
+                var listOfTvShows = Mapper.MapTvShows(originalListOfTvShows);
+                return listOfTvShows;
             }
             else
             {
-                return new ItemsResponse(); //empty object
+                return new List<Item>(); //empty object
             }
         }
 

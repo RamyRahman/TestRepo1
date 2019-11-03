@@ -8,63 +8,57 @@ namespace MoviesBackEnd.Main
 {
     public static class Mapper
     {
-        public static ItemsResponse MapMovies(MoviesDbQueryResult<Movie> queryResult)
+        public static List<Item> MapMovies(List<Movie> movies)
         {
-            var response = new ItemsResponse();
-            response.Page = queryResult.Page;
-            response.Total_Pages= queryResult.Total_Pages;
-            response.Total_Results= queryResult.Total_Results;
-            response.Results = new List<Item>();
+            var mappedMovies = new List<Item>();
 
-            foreach (var result in queryResult.Results)
+            foreach (var movie in movies)
             {
                 var item = new Item();
-                item.Id = result.Id;
-                item.OriginalLanguage = result.Original_Language;
-                item.Popularity = result.Popularity;
-                item.VoteCount = result.Vote_Count;
-                item.PosterPath = result.Poster_Path;
-                item.VoteAverage = result.Vote_Average;
-                item.Overview = result.Overview;
-                item.GenreIds = result.Genre_Ids;
+                item.Id = movie.Id;
+                item.OriginalLanguage = movie.Original_Language;
+                item.Popularity = movie.Popularity;
+                item.VoteCount = movie.Vote_Count;
+                item.PosterPath = movie.Poster_Path;
+                item.VoteAverage = movie.Vote_Average;
+                item.Overview = movie.Overview;
+                item.GenreIds = movie.Genre_Ids;
 
 
-                item.Title = result.Title;
-                item.Date = result.Release_Date;
-                item.Type =1;
+                item.Title = movie.Title;
+                item.Date = movie.Release_Date;
+                item.Type = 1;
 
-                response.Results.Add(item);
+                mappedMovies.Add(item);
             }
-            return response;
+            return mappedMovies;
         }
 
-        public static ItemsResponse MapTvShows(MoviesDbQueryResult<TvShow> queryResult)
-        {
-            var response = new ItemsResponse();
-            response.Page = queryResult.Page;
-            response.Total_Pages = queryResult.Total_Pages;
-            response.Total_Results = queryResult.Total_Results;
-            response.Results = new List<Item>();
 
-            foreach (var result in queryResult.Results)
+        public static List<Item> MapTvShows(List<TvShow> movies)
+        {
+            var mappedMovies = new List<Item>();
+
+            foreach (var movie in movies)
             {
                 var item = new Item();
-                item.Id = result.Id;
-                item.OriginalLanguage = result.Original_Language;
-                item.Popularity = result.Popularity;
-                item.VoteCount = result.Vote_Count;
-                item.PosterPath = result.Poster_Path;
-                item.VoteAverage = result.Vote_Average;
-                item.Overview = result.Overview;
-                item.GenreIds = result.Genre_Ids;
+                item.Id = movie.Id;
+                item.OriginalLanguage = movie.Original_Language;
+                item.Popularity = movie.Popularity;
+                item.VoteCount = movie.Vote_Count;
+                item.PosterPath = movie.Poster_Path;
+                item.VoteAverage = movie.Vote_Average;
+                item.Overview = movie.Overview;
+                item.GenreIds = movie.Genre_Ids;
 
-                item.Title = result.Original_Name;
-                item.Date = result.First_Air_Date;
+
+                item.Title = movie.Original_Name;
+                item.Date = movie.First_Air_Date;
                 item.Type = 2;
 
-                response.Results.Add(item);
+                mappedMovies.Add(item);
             }
-            return response;
+            return mappedMovies;
         }
 
     }
