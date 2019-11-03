@@ -34,5 +34,21 @@ namespace MoviesBackEnd.Controllers
             return await _moviesService.GetTopRatedTvShows(take);
         }
 
+        [Route("GetMovieById")]
+        [HttpGet]
+        public async Task<Dictionary<string, object>> GetMovieById(int id)
+        {
+            return await _moviesService.GetMovieById(id);
+        }
+
+        [Route("GetTvShowById")]
+        [HttpGet]
+        public async Task<Dictionary<string, object>> GetTvShowById(int id)
+        {
+            return await _moviesService.GetTvShowById(id);
+        }
+        
+
+
     }
 }

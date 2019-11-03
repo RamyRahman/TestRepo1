@@ -9,5 +9,8 @@ namespace MoviesBackEnd.Interfaces
     public interface IHttpService
     {
          Task<MoviesDbQueryResult<T>> Get<T>(string url);
+
+        Task<T> GetItem<T>(string url);
+
     }
 }

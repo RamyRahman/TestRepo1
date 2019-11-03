@@ -19,8 +19,8 @@ namespace MoviesBackEnd.Main
                 HttpResponseMessage response = await client.SendAsync(httpRequest);
                 if (response.IsSuccessStatusCode)
                 {
-                    var moviesAsString = await response.Content.ReadAsStringAsync();
-                    var result = Newtonsoft.Json.JsonConvert.DeserializeObject<MoviesDbQueryResult<T>>(moviesAsString);
+                    var showAsString = await response.Content.ReadAsStringAsync();
+                    var result = Newtonsoft.Json.JsonConvert.DeserializeObject<MoviesDbQueryResult<T>>(showAsString);
                     return result;
                 }
                 else
@@ -29,5 +29,25 @@ namespace MoviesBackEnd.Main
                 }
             }
         }
+
+        public async Task<T> GetItem<T>(string url)  
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, url);
+                HttpResponseMessage response = await client.SendAsync(httpRequest);
+                if (response.IsSuccessStatusCode)
+                {
+                    var showAsString = await response.Content.ReadAsStringAsync();
+                    var result = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(showAsString);
+                    return result;
+                }
+                else
+                {
+                    return default(T); 
+                }
+            }
+        }
+
     }
 }

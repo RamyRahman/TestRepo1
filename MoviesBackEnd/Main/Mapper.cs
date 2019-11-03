@@ -35,25 +35,25 @@ namespace MoviesBackEnd.Main
         }
 
 
-        public static List<Item> MapTvShows(List<TvShow> movies)
+        public static List<Item> MapTvShows(List<TvShow> tvShows)
         {
             var mappedMovies = new List<Item>();
 
-            foreach (var movie in movies)
+            foreach (var show in tvShows)
             {
                 var item = new Item();
-                item.Id = movie.Id;
-                item.OriginalLanguage = movie.Original_Language;
-                item.Popularity = movie.Popularity;
-                item.VoteCount = movie.Vote_Count;
-                item.PosterPath = movie.Poster_Path;
-                item.VoteAverage = movie.Vote_Average;
-                item.Overview = movie.Overview;
-                item.GenreIds = movie.Genre_Ids;
+                item.Id = show.Id;
+                item.OriginalLanguage = show.Original_Language;
+                item.Popularity = show.Popularity;
+                item.VoteCount = show.Vote_Count;
+                item.PosterPath = show.Poster_Path;
+                item.VoteAverage = show.Vote_Average;
+                item.Overview = show.Overview;
+                item.GenreIds = show.Genre_Ids;
 
 
-                item.Title = movie.Original_Name;
-                item.Date = movie.First_Air_Date;
+                item.Title = show.Original_Name;
+                item.Date = show.First_Air_Date;
                 item.Type = 2;
 
                 mappedMovies.Add(item);

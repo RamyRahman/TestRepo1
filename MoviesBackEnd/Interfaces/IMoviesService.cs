@@ -12,5 +12,9 @@ namespace MoviesBackEnd.Interfaces
 
         Task<List<Item>> GetTopRatedTvShows(int take);
 
+        Task<Dictionary<string, object>> GetMovieById(int id);
+
+        Task<Dictionary<string, object>> GetTvShowById(int id);
+
     }
 }

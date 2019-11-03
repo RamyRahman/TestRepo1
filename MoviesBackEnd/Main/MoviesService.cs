@@ -16,15 +16,17 @@ namespace MoviesBackEnd.Main
             this._httpService = _httpService;
         }
 
+
+
         public async Task<List<Item>> GetTopRatedMovies(int take)
         {
             var url = GlobalVariables.Url + "/movie/top_rated?api_key=" +
-                GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language; 
+                GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
 
             var queryResult = await this._httpService.Get<Movie>(url);
             if (queryResult != null)
             {
-                var originalListOfMovies= queryResult.Results.Take(take).ToList();
+                var originalListOfMovies = queryResult.Results.Take(take).ToList();
                 var listOfMovies = Mapper.MapMovies(originalListOfMovies);
                 return listOfMovies;
             }
@@ -38,12 +40,12 @@ namespace MoviesBackEnd.Main
         public async Task<List<Item>> GetTopRatedTvShows(int take)
         {
             var url = GlobalVariables.Url + "/tv/top_rated?api_key=" +
-               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language ;
+               GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
 
             var queryResult = await this._httpService.Get<TvShow>(url);
             if (queryResult != null)
             {
-                var originalListOfTvShows= queryResult.Results.Take(take).ToList();
+                var originalListOfTvShows = queryResult.Results.Take(take).ToList();
                 var listOfTvShows = Mapper.MapTvShows(originalListOfTvShows);
                 return listOfTvShows;
             }
@@ -53,5 +55,22 @@ namespace MoviesBackEnd.Main
             }
         }
 
+        public async Task<Dictionary<string, object>> GetTvShowById(int id)
+        {
+            var url = GlobalVariables.Url + "/tv/" + id + "?api_key=" +
+                          GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
+            var tvShow = await this._httpService.GetItem<Dictionary<string, object>>(url);
+
+            return tvShow ;
+        }
+
+        public async Task<Dictionary<string, object>> GetMovieById(int id)
+        {
+            var url = GlobalVariables.Url + "/movie/" + id + "?api_key=" +
+                          GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language;
+            var movie = await this._httpService.GetItem<Dictionary<string,object>>(url);
+
+            return  movie ;
+        }
     }
 }
