@@ -8,9 +8,9 @@ namespace MoviesBackEnd.Interfaces
 {
     public interface IMoviesService
     {
-        Task<List<Item>> GetTopRatedMovies();
+        Task<List<Item>> GetTopRatedMovies(int take);
 
-        Task<List<Item>> GetTopRatedTvShows();
+        Task<List<Item>> GetTopRatedTvShows(int take);
 
     }
 }

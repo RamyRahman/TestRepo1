@@ -16,7 +16,7 @@ namespace MoviesBackEnd.Main
             this._httpService = _httpService;
         }
 
-        public async Task<List<Item>> GetTopRatedMovies()
+        public async Task<List<Item>> GetTopRatedMovies(int take)
         {
             var url = GlobalVariables.Url + "/movie/top_rated?api_key=" +
                 GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language; 
@@ -24,7 +24,7 @@ namespace MoviesBackEnd.Main
             var queryResult = await this._httpService.Get<Movie>(url);
             if (queryResult != null)
             {
-                var originalListOfMovies= queryResult.Results.Take(6).ToList();
+                var originalListOfMovies= queryResult.Results.Take(take).ToList();
                 var listOfMovies = Mapper.MapMovies(originalListOfMovies);
                 return listOfMovies;
             }
@@ -35,7 +35,7 @@ namespace MoviesBackEnd.Main
 
         }
 
-        public async Task<List<Item>> GetTopRatedTvShows()
+        public async Task<List<Item>> GetTopRatedTvShows(int take)
         {
             var url = GlobalVariables.Url + "/tv/top_rated?api_key=" +
                GlobalVariables.API_KEY + "&language=" + GlobalVariables.Language ;
@@ -43,7 +43,7 @@ namespace MoviesBackEnd.Main
             var queryResult = await this._httpService.Get<TvShow>(url);
             if (queryResult != null)
             {
-                var originalListOfTvShows= queryResult.Results.Take(6).ToList();
+                var originalListOfTvShows= queryResult.Results.Take(take).ToList();
                 var listOfTvShows = Mapper.MapTvShows(originalListOfTvShows);
                 return listOfTvShows;
             }
