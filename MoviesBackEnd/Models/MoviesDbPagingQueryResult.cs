@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace MoviesBackEnd.Models
 {
-    public class MoviesDbQueryResult<T>
+    public class MoviesDbPagingQueryResult
     {
         public int Page { get; set; }
         public int Total_Results { get; set; }
         public int Total_Pages { get; set; }
-        public List<T> Results { get; set; }
-
+        public List<Item> Results { get; set; }
     }
 }

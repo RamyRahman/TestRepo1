@@ -16,13 +16,17 @@ namespace MoviesBackEnd.Interfaces
 
         Task<Dictionary<string, object>> GetTvShowById(int id);
 
-        Task<List<Item>> GetMoviesByCategory(int categoryId, int take);
+        Task<List<Item>> GetSortedMoviesByCategory(int categoryId, int take);
 
-        Task<List<Item>> GetTvShowsByCategory(int categoryId, int take);
+        Task<List<Item>> GetSortedTvShowsByCategory(int categoryId, int take);
 
         Task<Dictionary<string, object>> GetTvShowsCategories();
 
         Task<Dictionary<string, object>> GetMoviesCategories();
+
+        Task<MoviesDbPagingQueryResult> GetTvShowsByCategory(int categoryId, int page);
+
+        Task<MoviesDbPagingQueryResult> GetMoviesByCategory(int categoryId, int page);
 
     }
 }

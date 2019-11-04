@@ -48,18 +48,18 @@ namespace MoviesBackEnd.Controllers
             return await _moviesService.GetTvShowById(id);
         }
 
-        [Route("GetMoviesByCategory")]
+        [Route("GetSortedMoviesByCategory")]
         [HttpGet]
-        public async Task<List<Item>> GetMoviesByCategory(int categoryId, int take)
+        public async Task<List<Item>> GetSortedMoviesByCategory(int categoryId, int take)
         {
-            return await _moviesService.GetMoviesByCategory(categoryId,take);
+            return await _moviesService.GetSortedMoviesByCategory(categoryId,take);
         }
 
-        [Route("GetTvShowsByCategory")]
+        [Route("GetSortedTvShowsByCategory")]
         [HttpGet]
-        public async Task<List<Item>> GetTvShowsByCategory(int categoryId, int take)
+        public async Task<List<Item>> GetSortedTvShowsByCategory(int categoryId, int take)
         {
-            return await _moviesService.GetTvShowsByCategory(categoryId, take);
+            return await _moviesService.GetSortedTvShowsByCategory(categoryId, take);
         }
 
         [Route("GetTvShowsCategories")]
@@ -74,6 +74,20 @@ namespace MoviesBackEnd.Controllers
         public async Task<Dictionary<string, object>> GetMoviesCategories()
         {
             return await _moviesService.GetMoviesCategories();
+        }
+
+        [Route("GetMoviesByCategory")]
+        [HttpGet]
+        public async Task<MoviesDbPagingQueryResult> GetMoviesByCategory(int categoryId, int page)
+        {
+            return await _moviesService.GetMoviesByCategory(categoryId, page);
+        }
+
+        [Route("GetTvShowsByCategory")]
+        [HttpGet]
+        public async Task<MoviesDbPagingQueryResult> GetTvShowsByCategory(int categoryId, int page)
+        {
+            return await _moviesService.GetTvShowsByCategory(categoryId, page);
         }
 
     }
